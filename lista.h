@@ -16,6 +16,8 @@ class Lista {
 		~Lista();
 
 		unsigned obtener_longitud();
+
+		bool lista_vacia();
 		
 		//Pre: 0 < pos  <= obtener_longitud()+1
 		//Post: coloca el dato en la posición, la primer posición es la 1
@@ -28,4 +30,6 @@ class Lista {
 		//Pre: 0 < pos <= obtener_longitud()
 		//Post: devuelve el dato
 		Tipo consultar(unsigned pos);
+
+		Nodo* obtener_nodo(unsigned pos);
 };

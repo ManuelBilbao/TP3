@@ -1,15 +1,17 @@
 #include "lista.h"
- 
+
+const int NULL = 0;
+
 //Constructor
 Lista::Lista() {
-	this → primero = NULL;
-	this → longitud = 0;
+	this->primero = 0;
+	this->longitud = 0;
 }
 
 //Destructor
 Lista::~Lista() {
 	while (longitud > 0) {
-		borra(1);
+		borrar(1);
 	}
 }
 
@@ -24,9 +26,9 @@ void Lista::insertar(Tipo e, unsigned pos) {
 		nuevo->asignar_siguiente(primero);
 		this->primero = nuevo;
 	} else {
-		Nodo* anterior = obtener_nodo1(pos-1);
+		Nodo* anterior = obtener_nodo(pos-1);
 		nuevo->asignar_siguiente(anterior->obtener_siguiente());
-		anterior->asignar_siguiente(nuevo)
+		anterior->asignar_siguiente(nuevo);
 	}
 
 	this->longitud ++;
@@ -48,7 +50,7 @@ Tipo Lista::consultar(unsigned pos){
 	return (aux->obtener_dato());
 }
 
-void Listar::borrar(unsigned pos){
+void Lista::borrar(unsigned pos){
 	Nodo* borrar = primero;
 	
 	if (pos == 1) {

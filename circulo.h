@@ -5,13 +5,13 @@
 
 const double PI = 3.14159265359;
 
-class Circulos:public Figuras{
+class Circulo : public Figuras {
 
     private:
         double radio;
 
     public:
-        Circulos(double radio);
+        Circulo(double radio);
         double calcular_perimetro();
         double calcular_superficie();
 

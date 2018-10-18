@@ -5,18 +5,18 @@ Nodo::Nodo(Tipo dato) {
 	this->siguiente = 0;
 }
 
-Tipo obtener_dato() {
+Tipo Nodo::obtener_dato() {
 	return this->dato;
 }
 
-void asignar_dato(Tipo dato) {
+void Nodo::asignar_dato(Tipo dato) {
 	this->dato = dato;
 }
 
-Nodo* obtener_siguiente() {
+Nodo* Nodo::obtener_siguiente() {
 	return this->siguiente;
 }
 
-void asignar_siguiente(Nodo* siguiente) {
+void Nodo::asignar_siguiente(Nodo* siguiente) {
 	this->siguiente = siguiente;
 }
