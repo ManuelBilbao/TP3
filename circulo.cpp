@@ -1,4 +1,4 @@
-#include "Circulo.h"
+#include "circulo.h"
 
 Circulo::Circulo(double radio){
     this->radio = radio;
