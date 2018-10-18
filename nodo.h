@@ -1,7 +1,7 @@
 #ifndef NODO_H
 #define NODO_H
 
-typedef int Tipo;
+typedef Figuras Tipo;
 
 class Nodo {
 	private:
