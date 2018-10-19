@@ -1,15 +1,15 @@
 #include "nodo.h"
 
-Nodo::Nodo(Tipo dato) {
+Nodo::Nodo(Tipo* dato) {
 	this->dato = dato;
 	this->siguiente = 0;
 }
 
-Tipo Nodo::obtener_dato() {
+Tipo* Nodo::obtener_dato() {
 	return this->dato;
 }
 
-void Nodo::asignar_dato(Tipo dato) {
+void Nodo::asignar_dato(Tipo* dato) {
 	this->dato = dato;
 }
 

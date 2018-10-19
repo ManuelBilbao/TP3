@@ -1,7 +1,5 @@
 #include "lista.h"
 
-const int NULL = 0;
-
 //Constructor
 Lista::Lista() {
 	this->primero = 0;
@@ -19,9 +17,9 @@ bool Lista::lista_vacia() {
 	return (longitud == 0);
 }
 
-void Lista::insertar(Tipo e, unsigned pos) {
+void Lista::insertar(Tipo* e, unsigned pos) {
 	Nodo* nuevo = new Nodo(e);
-	
+
 	if (pos == 1) {
 		nuevo->asignar_siguiente(primero);
 		this->primero = nuevo;
@@ -37,7 +35,7 @@ void Lista::insertar(Tipo e, unsigned pos) {
 //Método privado
 Nodo* Lista::obtener_nodo(unsigned pos) {
 	Nodo* aux = primero;
-	
+
 	for (int i = 1; i < pos; i++) {
 		aux = aux->obtener_siguiente();
 	}
@@ -45,14 +43,14 @@ Nodo* Lista::obtener_nodo(unsigned pos) {
 	return aux;
 }
 
-Tipo Lista::consultar(unsigned pos){
+Tipo* Lista::consultar(unsigned pos){
 	Nodo* aux = obtener_nodo(pos);
 	return (aux->obtener_dato());
 }
 
 void Lista::borrar(unsigned pos){
 	Nodo* borrar = primero;
-	
+
 	if (pos == 1) {
 		primero = borrar->obtener_siguiente();
 	} else {
