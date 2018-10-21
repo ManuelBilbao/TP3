@@ -1,15 +1,64 @@
 #include <iostream>
 #include "lista.h"
+#include "circulo.h"
+#include "cuadrado.h"
+#include "rectangulo.h"
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 
 void imprimir_menu();
 int pedir_opcion();
-
+void agregar_objeto(Lista &lista);
+void listar(Lista &lista);
 
 int main() {
-	imprimir_menu();
-	pedir_opcion();
+	bool sigue = true;
+	Lista formas;
+	while (sigue) {
+		imprimir_menu();
+		int opcion = pedir_opcion();
+		switch (opcion) {
+			case 3:
+				agregar_objeto(formas);
+				break;
+			case 4:
+				listar(formas);
+				break;
+			default:
+				sigue = false;
+		}
+	}
+}
+
+void agregar_objeto(Lista &lista) {
+	string tipo;
+	cout << "Tipo dato: ";
+	cin >> tipo;
+	if (tipo.length() != 1) {
+		cin >> tipo;
+	}
+
+	srand(time(nullptr));
+	int numero = rand() % 1000;
+	if (tipo == "a") {
+		Circulo* circulo = new Circulo(numero);
+		lista.insertar(circulo, lista.obtener_longitud() + 1);
+	} else if (tipo == "b") {
+		Cuadrado* cuadrado = new Cuadrado(numero);
+		lista.insertar(cuadrado, lista.obtener_longitud() + 1);
+	} else if (tipo == "c") {
+		Rectangulo* rectangulo = new Rectangulo(numero, numero % 11);
+		lista.insertar(rectangulo, lista.obtener_longitud() + 1);
+	}
+}
+
+void listar(Lista &lista) {
+	cout << "Longitud: " << lista.obtener_longitud() << endl;
+	for (int i = 1; i < lista.obtener_longitud() + 1; i++) {
+		cout << lista.consultar(i)->obtener_tipo() << endl;
+	}
 }
 
 void imprimir_menu() {

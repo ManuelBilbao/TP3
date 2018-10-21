@@ -2,6 +2,7 @@
 
 Cuadrado::Cuadrado(double lado) {
 	this->lado = lado;
+	this->asignar_tipo("Cuadrado");
 	std::cout << "Se crea un cuadrado de " << lado << " de lado" << endl;
 }
 

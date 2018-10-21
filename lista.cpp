@@ -13,6 +13,10 @@ Lista::~Lista() {
 	}
 }
 
+unsigned Lista::obtener_longitud() {
+	return this->longitud;
+}
+
 bool Lista::lista_vacia() {
 	return (longitud == 0);
 }
@@ -24,12 +28,12 @@ void Lista::insertar(Tipo* e, unsigned pos) {
 		nuevo->asignar_siguiente(primero);
 		this->primero = nuevo;
 	} else {
-		Nodo* anterior = obtener_nodo(pos-1);
+		Nodo* anterior = obtener_nodo(pos - 1);
 		nuevo->asignar_siguiente(anterior->obtener_siguiente());
 		anterior->asignar_siguiente(nuevo);
 	}
 
-	this->longitud ++;
+	this->longitud++;
 }
 
 //Método privado
@@ -59,5 +63,5 @@ void Lista::borrar(unsigned pos){
 	}
 
 	delete borrar;
-	longitud--;
+	this->longitud--;
 }
