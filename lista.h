@@ -1,3 +1,6 @@
+#ifndef LISTA_H
+#define LISTA_H
+
 #include "nodo.h"
 
 class Lista {
@@ -33,3 +36,5 @@ class Lista {
 
 		Nodo* obtener_nodo(unsigned pos);
 };
+
+#endif
