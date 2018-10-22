@@ -14,11 +14,29 @@ int main() {
 		imprimir_menu();
 		int opcion = pedir_opcion();
 		switch (opcion) {
+			case 1:
+				consultar_posicion(formas);
+				break;
+			case 2:
+				eliminar_objeto(formas);
+				break;
 			case 3:
 				agregar_objeto(formas);
 				break;
 			case 4:
 				listar(formas);
+				break;
+			case 5:
+				superficie_max(formas);
+				break;
+			case 6:
+				superficie_min(formas);
+				break;
+			case 7:
+				perimetro_max(formas);
+				break;
+			case 8:
+				perimetro_min(formas);
 				break;
 			default:
 				sigue = false;

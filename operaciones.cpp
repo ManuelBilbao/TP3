@@ -1,5 +1,55 @@
 #include "operaciones.h"
 
+unsigned pedir_posicion(unsigned longitud_lista) {
+	bool posicion_valida = false;
+	int posicion;
+
+	while (!posicion_valida) {
+		cout << " Ingresar posicion deseada: ";
+		cin >> posicion;
+		
+		while (!cin.good()) { // Comprobar que sea un numero
+			cin.clear();
+			cin.ignore();
+			cout << " Por favor ingrese un numero valido";
+			cin >> posicion;
+		}
+
+		if (posicion > 0 && posicion <= longitud_lista) {
+			posicion_valida = true;
+		} else {
+			cout << endl;
+			cout << " Por favor ingrese una posicion valida (mayor a 0 y menor o igual a " << longitud_lista << ")";
+			cout << endl;
+		}
+	}
+}
+
+void msj_lista_vacia() {
+	cout << endl << " No se encontro ninguna forma en la lista" << endl;
+}
+
+void consultar_posicion(Lista &lista) {
+	if (lista.obtener_longitud() <= 0) {
+		msj_lista_vacia();
+		return;
+	}
+
+	unsigned posicion = pedir_posicion(lista.obtener_longitud());
+	Tipo* forma = lista.consultar(posicion);
+	cout << endl << " El objeto es un " << forma->obtener_tipo() << endl;
+}
+
+void eliminar_objeto(Lista &lista) {
+	if (lista.obtener_longitud() <= 0) {
+		msj_lista_vacia();
+		return;
+	}
+
+	unsigned posicion = pedir_posicion(lista.obtener_longitud());
+	lista.borrar(posicion);
+}
+
 void agregar_objeto(Lista &lista) {
 	string tipo;
 	bool tipo_valido = false;
@@ -9,7 +59,7 @@ void agregar_objeto(Lista &lista) {
 		cout << " Tipo de forma: ";
 		cin >> tipo;
 		
-		if (tipo.length() == 1 && (tipo == "A" || tipo == "B" || tipo == "C")) {
+		if (tipo.length() == 1 && (tipo == "A" || tipo == "B" || tipo == "C" || tipo == "X")) {
 			tipo_valido = true;
 		} else {
 			cout << endl << " Por favor ingrese una forma valida" << endl;
@@ -26,14 +76,115 @@ void agregar_objeto(Lista &lista) {
 		figura = new Cuadrado(numero);
 	else if (tipo == "C")
 		figura = new Rectangulo(numero, numero % 11);
+	else if (tipo == "X")
+		return;
 
 	lista.insertar(figura, lista.obtener_longitud() + 1);
 }
 
 void listar(Lista &lista) {
-	cout << endl << "Listado de formas:" << endl;
+	if (lista.obtener_longitud() <= 0) {
+		msj_lista_vacia();
+		return;
+	}
+
+	cout << endl << " Listado de formas:" << endl;
 	for (int i = 1; i < lista.obtener_longitud() + 1; i++) {
-		cout << lista.consultar(i)->obtener_tipo() << endl;
+		cout << " " << i << ". " << lista.consultar(i)->obtener_tipo() << endl;
 	}
 	cout << endl;
+}
+
+void superficie_max(Lista &lista) {
+	if (lista.obtener_longitud() <= 0) {
+		msj_lista_vacia();
+		return;
+	}
+
+	double superficie_maxima = 0;
+	Tipo* forma_mayor = 0;
+
+	for (int i = 1; i < lista.obtener_longitud() + 1; i++) {
+		Tipo* forma = lista.consultar(i);
+		double superficie = forma->calcular_superficie();
+
+		if (superficie > superficie_maxima) {
+			superficie_maxima = superficie;
+			forma_mayor = forma;
+		}
+	}
+
+	cout << endl << " El objeto con mayor superficie es un " << forma_mayor->obtener_tipo() << " y su valor es " << superficie_maxima << endl;
+}
+
+void superficie_min(Lista &lista) {
+	double superficie_minima;
+	Tipo* forma_menor;
+
+	if (lista.obtener_longitud() > 0) {
+		forma_menor = lista.consultar(1);
+		superficie_minima = forma_menor->calcular_perimetro();
+	} else {
+		cout << endl << " No se encontro ninguna forma en la lista" << endl;
+		return;
+	}
+
+	for (int i = 1; i < lista.obtener_longitud() + 1; i++) {
+		Tipo* forma = lista.consultar(i);
+		double perimetro = forma->calcular_perimetro();
+
+		if (perimetro < superficie_minima) {
+			superficie_minima = perimetro;
+			forma_menor = forma;
+		}
+	}
+
+	cout << endl << " El objeto con menor superficie es un " << forma_menor->obtener_tipo() << " y su valor es " << superficie_minima << endl;
+}
+
+void perimetro_max(Lista &lista) {
+	if (lista.obtener_longitud() <= 0) {
+		msj_lista_vacia();
+		return;
+	}
+
+	double perimetro_maximo = 0;
+	Tipo* forma_mayor = 0;
+
+	for (int i = 1; i < lista.obtener_longitud() + 1; i++) {
+		Tipo* forma = lista.consultar(i);
+		double perimetro = forma->calcular_perimetro();
+
+		if (perimetro > perimetro_maximo) {
+			perimetro_maximo = perimetro;
+			forma_mayor = forma;
+		}
+	}
+
+	cout << endl << " El objeto con mayor perimetro es un " << forma_mayor->obtener_tipo() << " y su valor es " << perimetro_maximo << endl;
+}
+
+void perimetro_min(Lista &lista) {
+	double perimetro_minimo;
+	Tipo* forma_menor;
+
+	if (lista.obtener_longitud() > 0) {
+		forma_menor = lista.consultar(1);
+		perimetro_minimo = forma_menor->calcular_perimetro();
+	} else {
+		cout << endl << " No se encontro ninguna forma en la lista" << endl;
+		return;
+	}
+
+	for (int i = 1; i < lista.obtener_longitud() + 1; i++) {
+		Tipo* forma = lista.consultar(i);
+		double perimetro = forma->calcular_perimetro();
+
+		if (perimetro < perimetro_minimo) {
+			perimetro_minimo = perimetro;
+			forma_menor = forma;
+		}
+	}
+
+	cout << endl << " El objeto con menor perimetro es un " << forma_menor->obtener_tipo() << " y su valor es " << perimetro_minimo << endl;
 }
