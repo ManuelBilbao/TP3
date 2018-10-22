@@ -58,8 +58,10 @@ void Lista::borrar(unsigned pos){
 	if (pos == 1) {
 		primero = borrar->obtener_siguiente();
 	} else {
+		borrar = obtener_nodo(pos);
 		Nodo* anterior = obtener_nodo(pos - 1);
-		borrar = anterior->obtener_siguiente();
+		Nodo* siguiente = borrar->obtener_siguiente();
+		anterior->asignar_siguiente(siguiente);
 	}
 
 	delete borrar;
