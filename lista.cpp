@@ -40,7 +40,7 @@ void Lista::insertar(Tipo* e, unsigned pos) {
 Nodo* Lista::obtener_nodo(unsigned pos) {
 	Nodo* aux = primero;
 
-	for (int i = 1; i < pos; i++) {
+	for (unsigned i = 1; i < pos; i++) {
 		aux = aux->obtener_siguiente();
 	}
 

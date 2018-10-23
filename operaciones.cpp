@@ -2,12 +2,12 @@
 
 unsigned pedir_posicion(unsigned longitud_lista) {
 	bool posicion_valida = false;
-	int posicion;
+	unsigned posicion;
 
 	while (!posicion_valida) {
 		cout << " Ingresar posicion deseada: ";
 		cin >> posicion;
-		
+
 		while (!cin.good()) { // Comprobar que sea un numero
 			cin.clear();
 			cin.ignore();
@@ -23,10 +23,11 @@ unsigned pedir_posicion(unsigned longitud_lista) {
 			cout << endl;
 		}
 	}
+	return posicion;
 }
 
 void msj_lista_vacia() {
-	cout << endl << " No se encontro ninguna forma en la lista" << endl;
+	cout << endl << " No se encontro ninguna forma en la lista" << endl << endl;
 }
 
 void consultar_posicion(Lista &lista) {
@@ -38,6 +39,7 @@ void consultar_posicion(Lista &lista) {
 	unsigned posicion = pedir_posicion(lista.obtener_longitud());
 	Tipo* forma = lista.consultar(posicion);
 	cout << endl << " El objeto es un " << forma->obtener_tipo() << endl;
+	cout << " Su superficie es de: " << forma->calcular_superficie() << " y su perimetro de: " << forma->calcular_perimetro() << endl << endl;
 }
 
 void eliminar_objeto(Lista &lista) {
@@ -53,12 +55,12 @@ void eliminar_objeto(Lista &lista) {
 void agregar_objeto(Lista &lista) {
 	string tipo;
 	bool tipo_valido = false;
-	
+
 	while (!tipo_valido) {
-		cout << " A: Circulo, B: Cuadrado, C: Rectangulo, X: Cancelar" << endl;
+		cout << " A: Cuadrado, B: Rectangulo, C: Circulo, X: Cancelar" << endl;
 		cout << " Tipo de forma: ";
 		cin >> tipo;
-		
+
 		if (tipo.length() == 1 && (tipo == "A" || tipo == "B" || tipo == "C" || tipo == "X")) {
 			tipo_valido = true;
 		} else {
@@ -69,13 +71,13 @@ void agregar_objeto(Lista &lista) {
 	srand(time(nullptr));
 	int numero = rand() % 1000;
 	Figuras* figura;
-	
+
 	if (tipo == "A")
-		figura = new Circulo(numero);
-	else if (tipo == "B")
 		figura = new Cuadrado(numero);
-	else if (tipo == "C")
+	else if (tipo == "B")
 		figura = new Rectangulo(numero, numero % 11);
+	else if (tipo == "C")
+		figura = new Circulo(numero);
 	else if (tipo == "X")
 		return;
 
@@ -89,7 +91,7 @@ void listar(Lista &lista) {
 	}
 
 	cout << endl << " Listado de formas:" << endl;
-	for (int i = 1; i < lista.obtener_longitud() + 1; i++) {
+	for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
 		cout << " " << i << ". " << lista.consultar(i)->obtener_tipo() << endl;
 	}
 	cout << endl;
@@ -104,7 +106,7 @@ void superficie_max(Lista &lista) {
 	double superficie_maxima = 0;
 	Tipo* forma_mayor = 0;
 
-	for (int i = 1; i < lista.obtener_longitud() + 1; i++) {
+	for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
 		Tipo* forma = lista.consultar(i);
 		double superficie = forma->calcular_superficie();
 
@@ -129,7 +131,7 @@ void superficie_min(Lista &lista) {
 		return;
 	}
 
-	for (int i = 1; i < lista.obtener_longitud() + 1; i++) {
+	for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
 		Tipo* forma = lista.consultar(i);
 		double perimetro = forma->calcular_perimetro();
 
@@ -151,7 +153,7 @@ void perimetro_max(Lista &lista) {
 	double perimetro_maximo = 0;
 	Tipo* forma_mayor = 0;
 
-	for (int i = 1; i < lista.obtener_longitud() + 1; i++) {
+	for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
 		Tipo* forma = lista.consultar(i);
 		double perimetro = forma->calcular_perimetro();
 
@@ -176,7 +178,7 @@ void perimetro_min(Lista &lista) {
 		return;
 	}
 
-	for (int i = 1; i < lista.obtener_longitud() + 1; i++) {
+	for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
 		Tipo* forma = lista.consultar(i);
 		double perimetro = forma->calcular_perimetro();
 
