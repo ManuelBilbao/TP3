@@ -5,8 +5,11 @@
 #include "circulo.h"
 #include "cuadrado.h"
 #include "rectangulo.h"
+#include <iostream>
 #include <ctime>
 #include <cstdlib>
+
+using namespace std;
 
 void consultar_posicion(Lista &lista);
 void eliminar_objeto(Lista &lista);

@@ -1,4 +1,23 @@
 #include "operaciones.h"
+#include <iomanip>
+
+const string ESQUINA_SUPERIOR_IZQUIERDA = "\u250C";
+const string ESQUINA_SUPERIOR_DERECHA = "\u2510";
+const string ESQUINA_INFERIOR_IZQUIERDA = "\u2514";
+const string ESQUINA_INFERIOR_DERECHA = "\u2518";
+const string LINEA_HORIZONTAL = "\u2500";
+const string LINEA_VERTICAL = "\u2502";
+const string LINEA_HORIZONTAL_UNION_SUPERIOR = "\u252C";
+const string LINEA_HORIZONTAL_UNION_INFERIOR = "\u2534";
+const string LINEA_VERTICAL_UNION_IZQUIERDA = "\u251C";
+const string LINEA_VERTICAL_UNION_DERECHA = "\u2524";
+const string CRUZ = "\u253C";
+
+const int LONG_TIPO = 16;
+const int LONG_PERIMETRO = 20;
+const int LONG_SUPERFICIE = 20;
+
+const int CANTIDAD_DECIMALES = 4;
 
 unsigned pedir_posicion(unsigned longitud_lista) {
 	bool posicion_valida = false;
@@ -28,6 +47,100 @@ unsigned pedir_posicion(unsigned longitud_lista) {
 
 void msj_lista_vacia() {
 	cout << endl << " No se encontro ninguna forma en la lista" << endl << endl;
+}
+
+int contar_cifras(double numero) {
+	string str_numero = to_string(numero);
+	return str_numero.find(".") + CANTIDAD_DECIMALES + 1;
+}
+
+void dibujar_cabecera_tabla() {
+	// Primer fila (Borde)
+	cout << ESQUINA_SUPERIOR_IZQUIERDA;
+	for (int i = 0; i < LONG_TIPO; i++) {
+		cout << LINEA_HORIZONTAL;
+	}
+	cout << LINEA_HORIZONTAL_UNION_SUPERIOR;
+	for (int i = 0; i < LONG_PERIMETRO; i++) {
+		cout << LINEA_HORIZONTAL;
+	}
+	cout << LINEA_HORIZONTAL_UNION_SUPERIOR;
+	for (int i = 0; i < LONG_SUPERFICIE; i++) {
+		cout << LINEA_HORIZONTAL;
+	}
+	cout << ESQUINA_SUPERIOR_DERECHA << endl;
+
+	// Segunda fila (Titulos)
+	cout << LINEA_VERTICAL;
+	cout << "Tipo:";
+	for (int i = 0; i < LONG_TIPO - 5; i++) {
+		cout << " ";
+	}
+	cout << LINEA_VERTICAL;
+	cout << "Perimetro:";
+	for (int i = 0; i < LONG_PERIMETRO - 10; i++) {
+		cout << " ";
+	}
+	cout << LINEA_VERTICAL;
+	cout << "Superficie:";
+	for (int i = 0; i < LONG_SUPERFICIE - 11; i++) {
+		cout << " ";
+	}
+	cout << LINEA_VERTICAL << endl;
+
+	// Tercer fila (separador header)
+	cout << LINEA_VERTICAL_UNION_IZQUIERDA;
+	for (int i = 0; i < LONG_TIPO; i++) {
+		cout << LINEA_HORIZONTAL;
+	}
+	cout << CRUZ;
+	for (int i = 0; i < LONG_PERIMETRO; i++) {
+		cout << LINEA_HORIZONTAL;
+	}
+	cout << CRUZ;
+	for (int i = 0; i < LONG_SUPERFICIE; i++) {
+		cout << LINEA_HORIZONTAL;
+	}
+	cout << LINEA_VERTICAL_UNION_DERECHA << endl;
+}
+
+void dibujar_filas_tabla(Tipo* forma) {
+	cout << LINEA_VERTICAL;
+	cout << forma->obtener_tipo();
+	for (int i = 0; i < LONG_TIPO - (forma->obtener_tipo()).length(); i++) {
+		cout << " ";
+	}
+	cout << fixed << setprecision(CANTIDAD_DECIMALES);
+	cout << LINEA_VERTICAL;
+	cout << forma->calcular_perimetro();
+	int resto = contar_cifras(forma->calcular_perimetro());
+	for (int i = 0; i < LONG_PERIMETRO - resto; i++) {
+		cout << " ";
+	}
+	cout << LINEA_VERTICAL;
+	cout << forma->calcular_superficie();
+	resto = contar_cifras(forma->calcular_superficie());
+	for (int i = 0; i < LONG_SUPERFICIE - resto; i++) {
+		cout << " ";
+	}
+	cout << LINEA_VERTICAL;
+	cout << endl;
+}
+
+void dibujar_fin_tabla() {
+	cout << ESQUINA_INFERIOR_IZQUIERDA;
+	for (int i = 0; i < LONG_TIPO; i++) {
+		cout << LINEA_HORIZONTAL;
+	}
+	cout << LINEA_HORIZONTAL_UNION_INFERIOR;
+	for (int i = 0; i < LONG_PERIMETRO; i++) {
+		cout << LINEA_HORIZONTAL;
+	}
+	cout << LINEA_HORIZONTAL_UNION_INFERIOR;
+	for (int i = 0; i < LONG_SUPERFICIE; i++) {
+		cout << LINEA_HORIZONTAL;
+	}
+	cout << ESQUINA_INFERIOR_DERECHA << endl;
 }
 
 void consultar_posicion(Lista &lista) {
@@ -91,9 +204,12 @@ void listar(Lista &lista) {
 	}
 
 	cout << endl << " Listado de formas:" << endl;
+	dibujar_cabecera_tabla();
 	for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
-		cout << " " << i << ". " << lista.consultar(i)->obtener_tipo() << endl;
+		dibujar_filas_tabla(lista.consultar(i));
+		// cout << " " << i << ". " << lista.consultar(i)->obtener_tipo() << endl;
 	}
+	dibujar_fin_tabla();
 	cout << endl;
 }
 
