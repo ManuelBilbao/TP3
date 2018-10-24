@@ -11,8 +11,16 @@ class Circulo : public Figuras {
         double radio;
 
     public:
+
+        //constructor
         Circulo(double radio);
+        
+        //pre: -
+        //pos: devuelve el perimetro del circulo
         double calcular_perimetro();
+        
+        //pre: -
+        //pos: devuelve la superficie del circulo
         double calcular_superficie();
 
 };
