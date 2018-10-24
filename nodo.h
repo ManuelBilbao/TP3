@@ -1,9 +1,9 @@
 #ifndef NODO_H
 #define NODO_H
 
-#include "forma.h"
+#include "figura.h"
 
-typedef Figuras Tipo;
+typedef Figura Tipo;
 
 class Nodo {
 	private:

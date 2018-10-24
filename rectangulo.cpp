@@ -1,15 +1,14 @@
 #include "rectangulo.h"
 
-
-Rectangulo::Rectangulo(double altura, double base){
+Rectangulo::Rectangulo(double altura, double base) {
   this->altura = altura;
   this->base = base;
-  this->asignar_tipo("Rectangulo");
-  cout << " Se crea un rectangulo de altura " << altura << " y base " << base << endl;
+  this->tipo = "Rectangulo";
+  std::cout << " Se crea un rectangulo de altura " << altura << " y base " << base << endl;
 }
 
 double Rectangulo::calcular_superficie(){
-  return (this->altura * this-> base);
+  return (this->altura * this->base);
 }
 
 double Rectangulo::calcular_perimetro(){

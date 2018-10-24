@@ -1,5 +1,4 @@
 #include "operaciones.h"
-#include <iomanip>
 
 const int CANTIDAD_DECIMALES = 8;
 
@@ -46,7 +45,7 @@ void eliminar_objeto(Lista &lista) {
 	}
 
 	unsigned posicion = pedir_posicion(lista.obtener_longitud());
-	lista.borrar(posicion);
+	lista.borrar_elemento(posicion);
 }
 
 void agregar_objeto(Lista &lista) {
@@ -65,7 +64,7 @@ void agregar_objeto(Lista &lista) {
 		}
 	}
 
-	Figuras* figura;
+	Figura* figura;
 	if (tipo == "A") {
 		cout << " Ingrese un valor para el lado: ";
 		double lado = pedir_medida();

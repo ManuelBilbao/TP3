@@ -1,20 +1,19 @@
-#ifndef FORMA_H
-#define FORMA_H
+#ifndef FIGURA_H
+#define FIGURA_H
 
-#include <iostream>
 #include <string>
 
 using namespace std;
 
-class Figuras {
-	private:
+class Figura {
+	protected:
 		string tipo;
 	
 	public:
 		string obtener_tipo();
-		void asignar_tipo(string tipo);
 		virtual double calcular_superficie() = 0;
 		virtual double calcular_perimetro() = 0;
+		// virtual ~Figura() = 0;
 };
 
 #endif
