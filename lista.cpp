@@ -18,7 +18,7 @@ unsigned Lista::obtener_longitud() {
 	return this->longitud;
 }
 
-bool Lista::lista_vacia () {
+bool Lista::lista_vacia() {
 	return (longitud == LONGITUD_LISTA_VACIA);
 }
 

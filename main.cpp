@@ -13,27 +13,27 @@ int const MAXIMO_NUMERO_MENU     = 9;
 
 //pre:
 //post:
-void imprimir_menu ();
+void imprimir_menu();
 
 //pre:
 //post:
-int pedir_opcion ();
+int pedir_opcion();
 
 //pre:
 //post:
-double obtener_dato (string informacion, int *posicion_inicio, char final_lectura);
+double obtener_dato(string informacion, int *posicion_inicio, char final_lectura);
 
 //pre:
 //post:
-void pasar_datos (string informacion);
+void pasar_datos(string informacion);
 
 //pre:
 //post:
-void cargar_lista (Lista *forma);
+void cargar_lista(Lista *forma);
 
 //pre:
 //post:
-int main () {
+int main() {
 
 	bool sigue = true;
 	Lista formas;
@@ -78,7 +78,7 @@ int main () {
 
 }
 
-void imprimir_menu () {
+void imprimir_menu() {
 	cout << "\tFiguras y figuritas" << endl;
 	cout << "\t___________________" << endl << endl;
 	cout << " 1. Consultar posicion" << endl;
@@ -92,7 +92,7 @@ void imprimir_menu () {
 	cout << " 9. Salir" << endl << endl;
 }
 
-int pedir_opcion () {
+int pedir_opcion() {
 	int opcion;
 	cout << " Opcion: ";
 	cin >> opcion;
