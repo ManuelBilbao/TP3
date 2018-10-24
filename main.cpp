@@ -13,27 +13,27 @@ int const MAXIMO_NUMERO_MENU     = 9;
 
 //pre: -
 //pos: imprime por pantalla el menu de opciones
-void imprimir_menu ();
+void imprimir_menu();
 
 //pre: -
 //pos: devuelve una opcion valida ingresada por el usuario 
-int pedir_opcion ();
+int pedir_opcion();
 
 //pre: recibe la linea leida del archivo, la posicion desde la que se debe leer y el caracter que marca el final de la lectura y todos deben ser validos
 //pos: devuelve el dato que se leyo 
-double obtener_dato (string linea_leida, int *posicion_inicio, char final_lectura);
+double obtener_dato(string linea_leida, int *posicion_inicio, char final_lectura);
 
 //pre: recibe la linea que se leyo en el archivo
 //pos: crea la figura correspondiente a los datos leidos 
-void pasar_datos (string linea_leida);
+void pasar_datos(string linea_leida);
 
 //pre: recibe una lista a ser cargada
 //pos: carga la lista con los datos del archivo base
-void cargar_lista (Lista *forma);
+void cargar_lista(Lista *forma);
 
 //pre: -
 //pos: maneja el flujo del programa 
-int main () {
+int main() {
 
 	bool sigue = true;
 	Lista formas;
@@ -78,7 +78,7 @@ int main () {
 
 }
 
-void imprimir_menu () {
+void imprimir_menu() {
 	cout << "\tFiguras y figuritas" << endl;
 	cout << "\t___________________" << endl << endl;
 	cout << " 1. Consultar posicion" << endl;
@@ -92,7 +92,7 @@ void imprimir_menu () {
 	cout << " 9. Salir" << endl << endl;
 }
 
-int pedir_opcion () {
+int pedir_opcion() {
 	int opcion;
 	cout << " Opcion: ";
 	cin >> opcion;

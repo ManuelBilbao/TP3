@@ -13,34 +13,34 @@ class Lista {
 	// Métodos
 	public:
 		// Constructor
-		Lista ();
+		Lista();
 
 		// Destructor
-		~Lista ();
+		~Lista();
 
 		// Pre: -
 		// Post: Devuelve verdadero si la lista esta vacía
-		bool lista_vacia ();
+		bool lista_vacia();
 
 		//Pre: 0 < posicion  <= obtener_longitud()+1
 		//Post: coloca el dato en la posición, la primer posición es la 1
-		void insertar (Tipo* elemento, unsigned posicion);
+		void insertar(Tipo* elemento, unsigned posicion);
 
 		//Pre: 0 < posicion <= obtener_longitud()
 		//Post: devuelve el dato
-		Tipo* consultar (unsigned posicion);
+		Tipo* consultar(unsigned posicion);
 
 		//Pre: 0 < posicion <= obtener_longitud()
 		//Post:  quita el dato
-		void borrar_elemento (unsigned posicion);
+		void borrar_elemento(unsigned posicion);
 
 		// Pre: -
 		// Post: Devuelve la cantidad de nodos presentes en la lista
-		unsigned obtener_longitud ();
+		unsigned obtener_longitud();
 
 		//Pre: 0 < posicion <= obtener_longitud()
 		//Post: devuelve un puntero al nodo pedido
-		Nodo* obtener_nodo (unsigned posicion);
+		Nodo* obtener_nodo(unsigned posicion);
 };
 
 #endif
