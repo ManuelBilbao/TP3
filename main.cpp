@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "lista.h"
 #include "operaciones.h"
 
@@ -6,13 +7,20 @@ using namespace std;
 
 void imprimir_menu();
 int pedir_opcion();
+double obtener_dato (string informacion, int *posicion_inicio, char final_lectura);
+void pasar_datos (string informacion);
+void cargar_lista(Lista *forma);
+
+
 
 int main() {
 	bool sigue = true;
 	Lista formas;
+	cargar_lista(&formas);
 	while (sigue) {
 		imprimir_menu();
 		int opcion = pedir_opcion();
+		system("clear");
 		switch (opcion) {
 			case 1:
 				consultar_posicion(formas);
@@ -76,4 +84,57 @@ int pedir_opcion() {
 	}
 
 	return opcion;
+}
+
+
+
+double obtener_dato(string info, int *posicion_inicio, char final_lectura){
+int  cont2 = 0;
+string dato;
+double numero=1;
+  while(info[*posicion_inicio]!= final_lectura){
+    dato[cont2]=info[*posicion_inicio];
+    cont2++;
+    (*posicion_inicio)++;
+  }
+	numero = atof(dato.c_str());
+  return numero;
+}
+
+void pasar_datos (string informacion, Lista *forma){
+	int posicion_inicio;
+	switch (informacion[0]) {
+     case 'A':{
+			 posicion_inicio = 2;
+			 Figuras* figura = new Cuadrado (obtener_dato(informacion, &posicion_inicio,'\0'));
+			 forma->insertar(figura,forma->obtener_longitud()+1);
+    	 break;
+     }case 'B':{
+			 posicion_inicio = 2;
+			 double altura = obtener_dato(informacion, &posicion_inicio,' ');
+			 double base = obtener_dato(informacion, &posicion_inicio,'\0');
+			 Figuras* figura = new Rectangulo(altura, base);
+			 forma->insertar(figura,forma->obtener_longitud()+1);
+			 break;
+	   }case 'C':{
+			 posicion_inicio = 2;
+			 Figuras* figura = new Circulo (obtener_dato(informacion, &posicion_inicio,'\0'));
+			 forma->insertar(figura,forma->obtener_longitud()+1);
+       break;
+     }
+	}
+
+}
+
+void cargar_lista (Lista *forma){
+	ifstream archivo;
+	string informacion;
+	archivo.open("figuras.txt");
+	while(!archivo.eof()){
+		getline(archivo, informacion);
+		std::cout << informacion << '\n';
+		pasar_datos(informacion,forma);
+	}
+
+	archivo.close();
 }
