@@ -84,9 +84,7 @@ void agregar_objeto(Lista &lista) {
 		return;
 	}
 
-	unsigned posicion = pedir_posicion(lista.obtener_longitud() + 1);
-
-	lista.insertar(figura, posicion);
+	lista.insertar(figura, lista.obtener_longitud() + 1);
 }
 
 void listar(Lista &lista) {

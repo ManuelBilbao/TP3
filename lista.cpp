@@ -1,18 +1,18 @@
 #include "lista.h"
 
-int const POSICION_INICIO_LISTA = 1;
+int const PRIMER_POSICION = 1;
 int const LONGITUD_LISTA_VACIA = 0;
 
 //Constructor
 Lista::Lista () {
-	this->primero = 0;
-	this->longitud = 0;
+	this -> primero = NULL;
+	this -> longitud = 0;
 }
 
 //Destructor
 Lista::~Lista () {
 	while (longitud > LONGITUD_LISTA_VACIA) {
-		borrar_elemento (1);
+		borrar_elemento (PRIMER_POSICION);
 	}
 }
 
@@ -28,7 +28,7 @@ void Lista::insertar (Tipo* elemento, unsigned posicion) {
 
 	Nodo* nuevo = new Nodo (elemento);
 
-	if (posicion == POSICION_INICIO_LISTA) {
+	if (posicion == PRIMER_POSICION) {
 		nuevo -> asignar_siguiente (primero);
 		this -> primero = nuevo;
 	} else {
@@ -40,7 +40,6 @@ void Lista::insertar (Tipo* elemento, unsigned posicion) {
 	this -> longitud++;
 }
 
-//Método privado
 Nodo* Lista::obtener_nodo (unsigned posicion) {
 
 	Nodo* auxiliar = primero;
@@ -62,7 +61,7 @@ void Lista::borrar_elemento (unsigned posicion) {
 
 	Nodo* borrar = primero;
 
-	if (posicion == POSICION_INICIO_LISTA) {
+	if (posicion == PRIMER_POSICION) {
 		primero = borrar -> obtener_siguiente ();
 	} else {
 		borrar = obtener_nodo (posicion);
