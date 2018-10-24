@@ -5,6 +5,10 @@ Nodo::Nodo(Tipo* dato) {
 	this->siguiente = 0;
 }
 
+Nodo::~Nodo() {
+	delete this->dato;
+}
+
 Tipo* Nodo::obtener_dato() {
 	return this->dato;
 }
