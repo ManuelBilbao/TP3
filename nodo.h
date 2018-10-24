@@ -12,6 +12,7 @@ class Nodo {
 
 	public:
 		Nodo(Tipo* dato);
+		~Nodo();
 		Tipo* obtener_dato();
 		void asignar_dato(Tipo* dato);
 		Nodo* obtener_siguiente();
