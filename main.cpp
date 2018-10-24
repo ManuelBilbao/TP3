@@ -5,54 +5,80 @@
 
 using namespace std;
 
-void imprimir_menu();
-int pedir_opcion();
+char const FINAL_STRING          = '\0';
+int const POSICION_LETRA         = 0;
+int const POSICION_DATO_NUMERICO = 2;
+int const MINIMO_NUMERO_MENU     = 1;
+int const MAXIMO_NUMERO_MENU     = 9;
+
+//pre:
+//post:
+void imprimir_menu ();
+
+//pre:
+//post:
+int pedir_opcion ();
+
+//pre:
+//post:
 double obtener_dato (string informacion, int *posicion_inicio, char final_lectura);
+
+//pre:
+//post:
 void pasar_datos (string informacion);
-void cargar_lista(Lista *forma);
 
+//pre:
+//post:
+void cargar_lista (Lista *forma);
 
+//pre:
+//post:
+int main () {
 
-int main() {
 	bool sigue = true;
 	Lista formas;
-	cargar_lista(&formas);
+	cargar_lista (&formas);
+
 	while (sigue) {
-		imprimir_menu();
-		int opcion = pedir_opcion();
-		system("clear");
+
+		imprimir_menu ();
+		int opcion = pedir_opcion ();
+		system ("clear");
+
 		switch (opcion) {
 			case 1:
-				consultar_posicion(formas);
+				consultar_posicion (formas);
 				break;
 			case 2:
-				eliminar_objeto(formas);
+				eliminar_objeto (formas);
 				break;
 			case 3:
-				agregar_objeto(formas);
+				agregar_objeto (formas);
 				break;
 			case 4:
-				listar(formas);
+				listar (formas);
 				break;
 			case 5:
-				superficie_max(formas);
+				superficie_max (formas);
 				break;
 			case 6:
-				superficie_min(formas);
+				superficie_min (formas);
 				break;
 			case 7:
-				perimetro_max(formas);
+				perimetro_max (formas);
 				break;
 			case 8:
-				perimetro_min(formas);
+				perimetro_min (formas);
 				break;
 			default:
 				sigue = false;
 		}
+
 	}
+
 }
 
-void imprimir_menu() {
+void imprimir_menu () {
 	cout << "\tFiguras y figuritas" << endl;
 	cout << "\t___________________" << endl << endl;
 	cout << " 1. Consultar posicion" << endl;
@@ -66,75 +92,82 @@ void imprimir_menu() {
 	cout << " 9. Salir" << endl << endl;
 }
 
-int pedir_opcion() {
+int pedir_opcion () {
 	int opcion;
 	cout << " Opcion: ";
 	cin >> opcion;
 
-	if (!cin.good()) { // Comprobar que sea un numero
-		cin.clear();
-		cin.ignore();
+	if (!cin.good ()) { // Comprobar que sea un numero
+		cin.clear ();
+		cin.ignore ();
 		cout << " Por favor ingrese un numero" << endl;
-		return pedir_opcion();
+		return pedir_opcion ();
 	}
 
-	if (opcion < 1 || opcion > 9) {
+	if (opcion < MINIMO_NUMERO_MENU || opcion > MAXIMO_NUMERO_MENU) {
 		cout << " Por favor ingrese un numero entre 1 y 9" << endl;
-		return pedir_opcion();
+		return pedir_opcion ();
 	}
 
 	return opcion;
 }
 
+double obtener_dato (string linea_leida, int *posicion_inicio, char final_lectura){
 
+	int  contador = 0;
+	string dato_leido;
+	double medida_leida;
 
-double obtener_dato(string info, int *posicion_inicio, char final_lectura){
-int  cont2 = 0;
-string dato;
-double numero=1;
-  while(info[*posicion_inicio]!= final_lectura){
-    dato[cont2]=info[*posicion_inicio];
-    cont2++;
+  while(linea_leida[*posicion_inicio] != final_lectura){
+
+		dato_leido[contador] = linea_leida[*posicion_inicio];
+    contador++;
     (*posicion_inicio)++;
-  }
-	numero = atof(dato.c_str());
-  return numero;
+
+	}
+
+	medida_leida = atof(dato_leido.c_str());
+  return medida_leida;
 }
 
 void pasar_datos (string informacion, Lista *forma){
-	int posicion_inicio;
-	switch (informacion[0]) {
-     case 'A':{
-			 posicion_inicio = 2;
-			 Figuras* figura = new Cuadrado (obtener_dato(informacion, &posicion_inicio,'\0'));
-			 forma->insertar(figura,forma->obtener_longitud()+1);
-    	 break;
-     }case 'B':{
-			 posicion_inicio = 2;
-			 double altura = obtener_dato(informacion, &posicion_inicio,' ');
-			 double base = obtener_dato(informacion, &posicion_inicio,'\0');
-			 Figuras* figura = new Rectangulo(altura, base);
-			 forma->insertar(figura,forma->obtener_longitud()+1);
-			 break;
-	   }case 'C':{
-			 posicion_inicio = 2;
-			 Figuras* figura = new Circulo (obtener_dato(informacion, &posicion_inicio,'\0'));
-			 forma->insertar(figura,forma->obtener_longitud()+1);
-       break;
-     }
+
+	int posicion_inicio = POSICION_DATO_NUMERICO;
+
+	switch (informacion[POSICION_LETRA]) {
+
+    case 'A':{
+			Figuras* figura_cuadrada = new Cuadrado (obtener_dato (informacion, &posicion_inicio, FINAL_STRING));
+			forma -> insertar (figura_cuadrada, forma -> obtener_longitud()+1);
+    	break;
+    }case 'B':{
+			double altura = obtener_dato (informacion, &posicion_inicio, ' ');
+			double base = obtener_dato (informacion, &posicion_inicio, FINAL_STRING);
+			Figuras* figura_rectangular = new Rectangulo (altura, base);
+			forma -> insertar (figura_rectangular, forma -> obtener_longitud()+1);
+			break;
+		}case 'C':{
+			Figuras* figura_circular = new Circulo (obtener_dato(informacion, &posicion_inicio, FINAL_STRING));
+			forma -> insertar (figura_circular, forma -> obtener_longitud()+1);
+      break;
+		}
+
 	}
 
 }
 
 void cargar_lista (Lista *forma){
+
 	ifstream archivo;
 	string informacion;
-	archivo.open("figuras.txt");
-	while(!archivo.eof()){
-		getline(archivo, informacion);
-		std::cout << informacion << '\n';
-		pasar_datos(informacion,forma);
+	archivo.open ("figuras.txt");
+
+	while(!archivo.eof ()){
+
+		getline (archivo, informacion);
+		pasar_datos (informacion,forma);
+
 	}
 
-	archivo.close();
+	archivo.close ();
 }
