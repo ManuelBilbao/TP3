@@ -1,9 +1,9 @@
 #ifndef NODO_H
 #define NODO_H
 
-#include "forma.h"
+#include "figura.h"
 
-typedef Figuras Tipo;
+typedef Figura Tipo;
 
 class Nodo {
 	private:
@@ -12,6 +12,7 @@ class Nodo {
 
 	public:
 		Nodo(Tipo* dato);
+		~Nodo();
 		Tipo* obtener_dato();
 		void asignar_dato(Tipo* dato);
 		Nodo* obtener_siguiente();

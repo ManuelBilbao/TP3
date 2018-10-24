@@ -6,8 +6,8 @@
 #include "cuadrado.h"
 #include "rectangulo.h"
 #include <iostream>
-#include <ctime>
-#include <cstdlib>
+#include <iomanip>
+#include <string>
 
 using namespace std;
 

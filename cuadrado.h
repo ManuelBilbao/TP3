@@ -2,9 +2,9 @@
 #define CUADRADO_H
 
 #include <iostream>
-#include "forma.h"
+#include "figura.h"
 
-class Cuadrado : public Figuras {
+class Cuadrado : public Figura {
 	private:
 		double lado;
 

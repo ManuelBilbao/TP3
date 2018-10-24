@@ -101,12 +101,12 @@ int pedir_opcion () {
 		cin.clear ();
 		cin.ignore ();
 		cout << " Por favor ingrese un numero" << endl;
-		return pedir_opcion ();
+		return pedir_opcion();
 	}
 
 	if (opcion < MINIMO_NUMERO_MENU || opcion > MAXIMO_NUMERO_MENU) {
 		cout << " Por favor ingrese un numero entre 1 y 9" << endl;
-		return pedir_opcion ();
+		return pedir_opcion();
 	}
 
 	return opcion;
@@ -132,16 +132,16 @@ void pasar_datos(string informacion, Lista *forma) {
 
 	if (informacion[POSICION_LETRA] == 'A') {
 		double lado = obtener_dato(informacion, &posicion_inicio, FINAL_STRING);
-		Figuras* figura_cuadrada = new Cuadrado(lado);
+		Figura* figura_cuadrada = new Cuadrado(lado);
 		forma->insertar(figura_cuadrada, forma->obtener_longitud() + 1);
 	} else if (informacion[POSICION_LETRA] == 'B') {
 		double altura = obtener_dato (informacion, &posicion_inicio, ' ');
 		double base = obtener_dato (informacion, &posicion_inicio, FINAL_STRING);
-		Figuras* figura_rectangular = new Rectangulo (altura, base);
+		Figura* figura_rectangular = new Rectangulo (altura, base);
 		forma->insertar (figura_rectangular, forma->obtener_longitud() + 1);
 	} else if (informacion[POSICION_LETRA] == 'C') {
 		double radio = obtener_dato(informacion, &posicion_inicio, FINAL_STRING);
-		Figuras* figura_circular = new Circulo(radio);
+		Figura* figura_circular = new Circulo(radio);
 		forma->insertar(figura_circular, forma->obtener_longitud() + 1);
 	}
 }
