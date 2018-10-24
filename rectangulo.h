@@ -5,13 +5,21 @@
 #include "figura.h"
 
 class Rectangulo : public Figura {
-	private:
-		double altura;
-		double base;
-	public:
-		Rectangulo(double altura, double base);
-		double calcular_superficie();
-		double calcular_perimetro();
+  private:
+    double altura;
+    double base;
+  public:
+  
+    //constructor
+    Rectangulo(double altura, double base);
+   
+    //pre: -
+    //pos: devuelve la superficie del rectangulo
+    double calcular_superficie();
+  
+    //pre: -
+    //pos: devuelve el perimetro del rectangulo
+    double calcular_perimetro();
 };
 
 #endif
