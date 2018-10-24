@@ -11,28 +11,28 @@ int const POSICION_DATO_NUMERICO = 2;
 int const MINIMO_NUMERO_MENU     = 1;
 int const MAXIMO_NUMERO_MENU     = 9;
 
-//pre:
-//post:
+//pre: -
+//pos: imprime por pantalla el menu de opciones
 void imprimir_menu ();
 
-//pre:
-//post:
+//pre: -
+//pos: devuelve una opcion valida ingresada por el usuario 
 int pedir_opcion ();
 
-//pre:
-//post:
-double obtener_dato (string informacion, int *posicion_inicio, char final_lectura);
+//pre: recibe la linea leida del archivo, la posicion desde la que se debe leer y el caracter que marca el final de la lectura y todos deben ser validos
+//pos: devuelve el dato que se leyo 
+double obtener_dato (string linea_leida, int *posicion_inicio, char final_lectura);
 
-//pre:
-//post:
-void pasar_datos (string informacion);
+//pre: recibe la linea que se leyo en el archivo
+//pos: crea la figura correspondiente a los datos leidos 
+void pasar_datos (string linea_leida);
 
-//pre:
-//post:
+//pre: recibe una lista a ser cargada
+//pos: carga la lista con los datos del archivo base
 void cargar_lista (Lista *forma);
 
-//pre:
-//post:
+//pre: -
+//pos: maneja el flujo del programa 
 int main () {
 
 	bool sigue = true;
@@ -112,22 +112,26 @@ int pedir_opcion () {
 	return opcion;
 }
 
-double obtener_dato(string linea_leida, int *posicion_inicio, char final_lectura) {
-	int contador = 0;
+double obtener_dato (string linea_leida, int *posicion_inicio, char final_lectura){
+
+	int  contador = 0;
 	string dato_leido;
 	double medida_leida;
 
-	while (linea_leida[*posicion_inicio] != final_lectura) {
+  while(linea_leida[*posicion_inicio] != final_lectura){
+
 		dato_leido[contador] = linea_leida[*posicion_inicio];
-		contador++;
-		(*posicion_inicio)++;
+    contador++;
+    (*posicion_inicio)++;
+
 	}
 
 	medida_leida = atof(dato_leido.c_str());
-	return medida_leida;
+  return medida_leida;
 }
 
-void pasar_datos(string informacion, Lista *forma) {
+void pasar_datos (string linea_leida, Lista *forma){
+
 	int posicion_inicio = POSICION_DATO_NUMERICO;
 
 	if (informacion[POSICION_LETRA] == 'A') {
@@ -144,17 +148,21 @@ void pasar_datos(string informacion, Lista *forma) {
 		Figura* figura_circular = new Circulo(radio);
 		forma->insertar(figura_circular, forma->obtener_longitud() + 1);
 	}
+
 }
 
-void cargar_lista(Lista *forma) {
-	ifstream archivo;
-	string informacion;
-	archivo.open("figuras.txt");
+void cargar_lista (Lista *forma){
 
-	while (!archivo.eof()) {
-		getline(archivo, informacion);
-		pasar_datos(informacion,forma);
+	ifstream archivo;
+	string linea_leida;
+	archivo.open ("figuras.txt");
+
+	while(!archivo.eof ()){
+
+		getline (archivo, linea_leida);
+		pasar_datos (linea_leida,forma);
+
 	}
 
-	archivo.close();
+	archivo.close ();
 }
