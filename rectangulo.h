@@ -1,9 +1,8 @@
 #ifndef RECTANGULO_H
 #define RECTANGULO_H
-#include <iostream>
-#include "forma.h"
 
-using namespace std;
+#include <iostream>
+#include "figura.h"
 
 class Rectangulo : public Figuras {
   private:
@@ -21,7 +20,6 @@ class Rectangulo : public Figuras {
     //pre: -
     //pos: devuelve el perimetro del rectangulo
     double calcular_perimetro();
-
-};
+}
 
 #endif

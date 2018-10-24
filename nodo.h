@@ -1,9 +1,9 @@
 #ifndef NODO_H
 #define NODO_H
 
-#include "forma.h"
+#include "figura.h"
 
-typedef Figuras Tipo;
+typedef Figura Tipo;
 
 class Nodo {
 
@@ -33,6 +33,8 @@ class Nodo {
 		//pre: tiene que haber un nodo creado 
 		//pos: hace que el puntero al siguente nodo apuente a siguente
 		void asignar_siguiente(Nodo* siguiente);
+  
+    ~Nodo();
 };
 
 #endif

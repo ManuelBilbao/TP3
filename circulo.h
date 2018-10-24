@@ -1,11 +1,12 @@
 #ifndef CIRCULO_H
 #define CIRCULO_H
 
-#include "forma.h"
+#include <iostream>
+#include "figura.h"
 
 const double PI = 3.14159265359;
 
-class Circulo : public Figuras {
+class Circulo : public Figura {
 
     private:
         double radio;

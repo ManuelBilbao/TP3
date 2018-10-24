@@ -2,8 +2,8 @@
 
 Circulo::Circulo(double radio) {
     this->radio = radio;
-    this->asignar_tipo("Circulo");
-    cout << " Se crea un circulo de radio " << radio << endl;
+    this->tipo = "Circulo";
+    std::cout << " Se crea un circulo de radio " << radio << endl;
 }
 
 double Circulo::calcular_perimetro() {

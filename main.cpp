@@ -101,12 +101,12 @@ int pedir_opcion () {
 		cin.clear ();
 		cin.ignore ();
 		cout << " Por favor ingrese un numero" << endl;
-		return pedir_opcion ();
+		return pedir_opcion();
 	}
 
 	if (opcion < MINIMO_NUMERO_MENU || opcion > MAXIMO_NUMERO_MENU) {
 		cout << " Por favor ingrese un numero entre 1 y 9" << endl;
-		return pedir_opcion ();
+		return pedir_opcion();
 	}
 
 	return opcion;
@@ -134,24 +134,19 @@ void pasar_datos (string linea_leida, Lista *forma){
 
 	int posicion_inicio = POSICION_DATO_NUMERICO;
 
-	switch (linea_leida[POSICION_LETRA]) {
-
-    case 'A':{
-			Figuras* figura_cuadrada = new Cuadrado (obtener_dato (linea_leida, &posicion_inicio, FINAL_STRING));
-			forma -> insertar (figura_cuadrada, forma -> obtener_longitud()+1);
-    	break;
-    }case 'B':{
-			double altura = obtener_dato (linea_leida, &posicion_inicio, ' ');
-			double base = obtener_dato (linea_leida, &posicion_inicio, FINAL_STRING);
-			Figuras* figura_rectangular = new Rectangulo (altura, base);
-			forma -> insertar (figura_rectangular, forma -> obtener_longitud()+1);
-			break;
-		}case 'C':{
-			Figuras* figura_circular = new Circulo (obtener_dato(linea_leida, &posicion_inicio, FINAL_STRING));
-			forma -> insertar (figura_circular, forma -> obtener_longitud()+1);
-      break;
-		}
-
+	if (informacion[POSICION_LETRA] == 'A') {
+		double lado = obtener_dato(informacion, &posicion_inicio, FINAL_STRING);
+		Figura* figura_cuadrada = new Cuadrado(lado);
+		forma->insertar(figura_cuadrada, forma->obtener_longitud() + 1);
+	} else if (informacion[POSICION_LETRA] == 'B') {
+		double altura = obtener_dato (informacion, &posicion_inicio, ' ');
+		double base = obtener_dato (informacion, &posicion_inicio, FINAL_STRING);
+		Figura* figura_rectangular = new Rectangulo (altura, base);
+		forma->insertar (figura_rectangular, forma->obtener_longitud() + 1);
+	} else if (informacion[POSICION_LETRA] == 'C') {
+		double radio = obtener_dato(informacion, &posicion_inicio, FINAL_STRING);
+		Figura* figura_circular = new Circulo(radio);
+		forma->insertar(figura_circular, forma->obtener_longitud() + 1);
 	}
 
 }
