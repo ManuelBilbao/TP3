@@ -112,62 +112,49 @@ int pedir_opcion () {
 	return opcion;
 }
 
-double obtener_dato (string linea_leida, int *posicion_inicio, char final_lectura){
-
-	int  contador = 0;
+double obtener_dato(string linea_leida, int *posicion_inicio, char final_lectura) {
+	int contador = 0;
 	string dato_leido;
 	double medida_leida;
 
-  while(linea_leida[*posicion_inicio] != final_lectura){
-
+	while (linea_leida[*posicion_inicio] != final_lectura) {
 		dato_leido[contador] = linea_leida[*posicion_inicio];
-    contador++;
-    (*posicion_inicio)++;
-
+		contador++;
+		(*posicion_inicio)++;
 	}
 
 	medida_leida = atof(dato_leido.c_str());
-  return medida_leida;
+	return medida_leida;
 }
 
-void pasar_datos (string informacion, Lista *forma){
-
+void pasar_datos(string informacion, Lista *forma) {
 	int posicion_inicio = POSICION_DATO_NUMERICO;
 
-	switch (informacion[POSICION_LETRA]) {
-
-    case 'A':{
-			Figuras* figura_cuadrada = new Cuadrado (obtener_dato (informacion, &posicion_inicio, FINAL_STRING));
-			forma -> insertar (figura_cuadrada, forma -> obtener_longitud()+1);
-    	break;
-    }case 'B':{
-			double altura = obtener_dato (informacion, &posicion_inicio, ' ');
-			double base = obtener_dato (informacion, &posicion_inicio, FINAL_STRING);
-			Figuras* figura_rectangular = new Rectangulo (altura, base);
-			forma -> insertar (figura_rectangular, forma -> obtener_longitud()+1);
-			break;
-		}case 'C':{
-			Figuras* figura_circular = new Circulo (obtener_dato(informacion, &posicion_inicio, FINAL_STRING));
-			forma -> insertar (figura_circular, forma -> obtener_longitud()+1);
-      break;
-		}
-
+	if (informacion[POSICION_LETRA] == 'A') {
+		double lado = obtener_dato(informacion, &posicion_inicio, FINAL_STRING);
+		Figuras* figura_cuadrada = new Cuadrado(lado);
+		forma->insertar(figura_cuadrada, forma->obtener_longitud() + 1);
+	} else if (informacion[POSICION_LETRA] == 'B') {
+		double altura = obtener_dato (informacion, &posicion_inicio, ' ');
+		double base = obtener_dato (informacion, &posicion_inicio, FINAL_STRING);
+		Figuras* figura_rectangular = new Rectangulo (altura, base);
+		forma->insertar (figura_rectangular, forma->obtener_longitud() + 1);
+	} else if (informacion[POSICION_LETRA] == 'C') {
+		double radio = obtener_dato(informacion, &posicion_inicio, FINAL_STRING);
+		Figuras* figura_circular = new Circulo(radio);
+		forma->insertar(figura_circular, forma->obtener_longitud() + 1);
 	}
-
 }
 
-void cargar_lista (Lista *forma){
-
+void cargar_lista(Lista *forma) {
 	ifstream archivo;
 	string informacion;
-	archivo.open ("figuras.txt");
+	archivo.open("figuras.txt");
 
-	while(!archivo.eof ()){
-
-		getline (archivo, informacion);
-		pasar_datos (informacion,forma);
-
+	while (!archivo.eof()) {
+		getline(archivo, informacion);
+		pasar_datos(informacion,forma);
 	}
 
-	archivo.close ();
+	archivo.close();
 }
