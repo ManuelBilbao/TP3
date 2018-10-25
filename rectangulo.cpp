@@ -8,26 +8,28 @@ Rectangulo::Rectangulo(double altura, double base) {
 }
 
 double Rectangulo::calcular_superficie() {
-<<<<<<< HEAD
+	
 	return (this->altura * this->base);
 }
 
 double Rectangulo::calcular_perimetro() {
+	
 	return (2 * (this->altura + this->base));
-=======
-  return (this->altura * this->base);
+	return (this->altura * this->base);
 }
 
 double Rectangulo::calcular_perimetro() {
-  return (2 * (this->altura + this->base));
->>>>>>> 6e59b3af4768fca3a34502af3f79421769541588
+
+	return (2 * (this->altura + this->base));
 }
 
 void Rectangulo::mostrar() {
+	
 	std::cout << endl << " El objeto es un rectangulo" << endl;
 	std::cout << " Su superficie es de: " << calcular_superficie() << " y su perimetro de: " << calcular_perimetro() << endl << endl;
 }
 
 Rectangulo::~Rectangulo() {
+	
 	std::cout << " Se destruye un rectangulo de altura " << altura << " y base " << base << endl;
 }
