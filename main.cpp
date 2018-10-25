@@ -134,22 +134,22 @@ void pasar_datos (string linea_leida, Lista *forma){
 
 	int posicion_inicio = POSICION_DATO_NUMERICO;
 
-	if (informacion[POSICION_LETRA] == 'A') {
+	if (linea_leida[POSICION_LETRA] == 'A') {
 
-		double lado = obtener_dato(informacion, &posicion_inicio, FINAL_STRING);
+		double lado = obtener_dato(linea_leida, &posicion_inicio, FINAL_STRING);
 		Figura* figura_cuadrada = new Cuadrado(lado);
 		forma->insertar(figura_cuadrada, forma->obtener_longitud() + 1);
 
-	} else if (informacion[POSICION_LETRA] == 'B') {
+	} else if (linea_leida[POSICION_LETRA] == 'B') {
 
-		double altura = obtener_dato (informacion, &posicion_inicio, ' ');
-		double base = obtener_dato (informacion, &posicion_inicio, FINAL_STRING);
+		double altura = obtener_dato (linea_leida, &posicion_inicio, ' ');
+		double base = obtener_dato (linea_leida, &posicion_inicio, FINAL_STRING);
 		Figura* figura_rectangular = new Rectangulo (altura, base);
 		forma->insertar (figura_rectangular, forma->obtener_longitud() + 1);
 
-	} else if (informacion[POSICION_LETRA] == 'C') {
+	} else if (linea_leida[POSICION_LETRA] == 'C') {
 
-		double radio = obtener_dato(informacion, &posicion_inicio, FINAL_STRING);
+		double radio = obtener_dato(linea_leida, &posicion_inicio, FINAL_STRING);
 		Figura* figura_circular = new Circulo(radio);
 		forma->insertar(figura_circular, forma->obtener_longitud() + 1);
 		
