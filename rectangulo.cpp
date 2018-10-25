@@ -13,12 +13,6 @@ double Rectangulo::calcular_superficie() {
 }
 
 double Rectangulo::calcular_perimetro() {
-	
-	return (2 * (this->altura + this->base));
-	return (this->altura * this->base);
-}
-
-double Rectangulo::calcular_perimetro() {
 
 	return (2 * (this->altura + this->base));
 }
