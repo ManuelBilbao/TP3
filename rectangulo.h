@@ -20,6 +20,10 @@ class Rectangulo : public Figura {
     //pre: -
     //pos: devuelve el perimetro del rectangulo
     double calcular_perimetro();
+
+    void mostrar();
+
+    ~Rectangulo();
 };
 
 #endif

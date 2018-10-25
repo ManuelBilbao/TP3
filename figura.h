@@ -13,7 +13,8 @@ class Figura {
 		string obtener_tipo();
 		virtual double calcular_superficie() = 0;
 		virtual double calcular_perimetro() = 0;
-		// virtual ~Figura() = 0;
+		virtual void mostrar() = 0;
+		virtual ~Figura() {};
 };
 
 #endif

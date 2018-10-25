@@ -12,6 +12,7 @@ class Cuadrado : public Figura {
 		Cuadrado(double lado);
 		double calcular_perimetro();
 		double calcular_superficie();
+		void mostrar();
 		~Cuadrado();
 };
 

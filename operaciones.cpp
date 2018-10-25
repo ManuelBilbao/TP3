@@ -54,8 +54,7 @@ void consultar_posicion(Lista &lista) {
 
 	unsigned posicion = pedir_posicion(lista.obtener_longitud());
 	Tipo* forma = lista.consultar(posicion);
-	cout << endl << " El objeto es un " << forma->obtener_tipo() << endl;
-	cout << " Su superficie es de: " << forma->calcular_superficie() << " y su perimetro de: " << forma->calcular_perimetro() << endl << endl;
+	forma->mostrar();
 }
 
 void eliminar_objeto(Lista &lista) {
