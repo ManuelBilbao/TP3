@@ -18,12 +18,32 @@ const int LONG_TIPO = 16;
 const int LONG_PERIMETRO = 15 + CANTIDAD_DECIMALES;
 const int LONG_SUPERFICIE = 15 + CANTIDAD_DECIMALES;
 
+//Pre: recibe la longitud de la lista
+//Pos: devuelve la posicion deseada por el usuario si es que esta es valida
 unsigned pedir_posicion(unsigned longitud_lista);
+
+//Pre: -
+//Pos: imprime por pantalla un mensaje avisando que la lista esta vacia 
 void msj_lista_vacia();
+
+//Pre: -
+//Pos: devuelve las cifras del numero ingresado 
 int contar_cifras(double numero);
+
+//Pre: -
+//Pos: dibuja la cabecera de la tabla por pantalla
 void dibujar_cabecera_tabla();
+
+//Pre: -
+//Pos: dibuja las filas de la tabla por pantalla
 void dibujar_filas_tabla(Tipo* forma);
+
+//Pre: -
+//Pos: dibuja el final de la tabla por pantalla
 void dibujar_fin_tabla();
+
+//Pre: -
+//Pos: pide las medidas necesarias para la forma y las devuelve  
 double pedir_medida();
 
 void consultar_posicion(Lista &lista) {
@@ -34,8 +54,7 @@ void consultar_posicion(Lista &lista) {
 
 	unsigned posicion = pedir_posicion(lista.obtener_longitud());
 	Tipo* forma = lista.consultar(posicion);
-	cout << endl << " El objeto es un " << forma->obtener_tipo() << endl;
-	cout << " Su superficie es de: " << forma->calcular_superficie() << " y su perimetro de: " << forma->calcular_perimetro() << endl << endl;
+	forma->mostrar();
 }
 
 void eliminar_objeto(Lista &lista) {

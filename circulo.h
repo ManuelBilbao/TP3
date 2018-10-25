@@ -24,6 +24,11 @@ class Circulo : public Figura {
         //pos: devuelve la superficie del circulo
         double calcular_superficie();
 
+        //pre: -
+        //pos: muestra por pantalla perimetro y superficie de un circulo
+        void mostrar();
+
+        ~Circulo();
 };
 
 #endif // CIRCULO_H

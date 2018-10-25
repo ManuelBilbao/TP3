@@ -19,7 +19,12 @@ double Cuadrado::calcular_superficie() {
 	return lado * lado;
 }
 
+void Cuadrado::mostrar() {
+	std::cout << endl << " El objeto es un cuadrado" << endl;
+	cout << " Su superficie es de: " << calcular_superficie() << " y su perimetro de: " << calcular_perimetro() << endl << endl;
+}
+
 //destructor
 Cuadrado::~Cuadrado() {
-	std::cout << "Se destruye un cuadrado" << endl;
+	std::cout << "Se destruye un cuadrado de lado " << lado << endl;
 }

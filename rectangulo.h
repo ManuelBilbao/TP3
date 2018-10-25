@@ -4,7 +4,7 @@
 #include <iostream>
 #include "figura.h"
 
-class Rectangulo : public Figuras {
+class Rectangulo : public Figura {
   private:
     double altura;
     double base;
@@ -20,6 +20,10 @@ class Rectangulo : public Figuras {
     //pre: -
     //pos: devuelve el perimetro del rectangulo
     double calcular_perimetro();
-}
+
+    void mostrar();
+
+    ~Rectangulo();
+};
 
 #endif

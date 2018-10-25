@@ -13,3 +13,12 @@ double Circulo::calcular_perimetro() {
 double Circulo::calcular_superficie() {
     return PI * radio * radio;
 }
+
+void Circulo::mostrar() {
+	std::cout << endl << " El objeto es un circulo" << endl;
+	std::cout << " Su superficie es de: " << calcular_superficie() << " y su perimetro de: " << calcular_perimetro() << endl << endl;
+}
+
+Circulo::~Circulo() {
+	std::cout << " Se destruye un circulo de radio " << radio << endl;
+}
