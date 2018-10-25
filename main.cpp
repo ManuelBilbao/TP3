@@ -16,15 +16,15 @@ int const MAXIMO_NUMERO_MENU     = 9;
 void imprimir_menu ();
 
 //pre: -
-//pos: devuelve una opcion valida ingresada por el usuario 
+//pos: devuelve una opcion valida ingresada por el usuario
 int pedir_opcion ();
 
 //pre: recibe la linea leida del archivo, la posicion desde la que se debe leer y el caracter que marca el final de la lectura y todos deben ser validos
-//pos: devuelve el dato que se leyo 
+//pos: devuelve el dato que se leyo
 double obtener_dato (string linea_leida, int *posicion_inicio, char final_lectura);
 
 //pre: recibe la linea que se leyo en el archivo
-//pos: crea la figura correspondiente a los datos leidos 
+//pos: crea la figura correspondiente a los datos leidos
 void pasar_datos (string linea_leida);
 
 //pre: recibe una lista a ser cargada
@@ -32,9 +32,10 @@ void pasar_datos (string linea_leida);
 void cargar_lista (Lista *forma);
 
 //pre: -
-//pos: maneja el flujo del programa 
+//pos: maneja el flujo del programa
 int main () {
 
+	system ("clear");
 	bool sigue = true;
 	Lista formas;
 	cargar_lista (&formas);
@@ -79,7 +80,7 @@ int main () {
 }
 
 void imprimir_menu () {
-	cout << "\tFiguras y figuritas" << endl;
+	cout << endl << "\tFiguras y figuritas" << endl;
 	cout << "\t___________________" << endl << endl;
 	cout << " 1. Consultar posicion" << endl;
 	cout << " 2. Eliminar objeto" << endl;
@@ -152,7 +153,7 @@ void pasar_datos (string linea_leida, Lista *forma){
 		double radio = obtener_dato(linea_leida, &posicion_inicio, FINAL_STRING);
 		Figura* figura_circular = new Circulo(radio);
 		forma->insertar(figura_circular, forma->obtener_longitud() + 1);
-		
+
 	}
 
 }
