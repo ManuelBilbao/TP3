@@ -2,7 +2,7 @@
 
 Circulo::Circulo(double radio) {
 	this->radio = radio;
- 	this->tipo = "Circulo";
+ 	this->tipo_figura = "Circulo";
 	std::cout << " Se crea un circulo de radio " << radio << endl;
 }
 

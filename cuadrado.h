@@ -5,15 +5,31 @@
 #include "figura.h"
 
 class Cuadrado : public Figura {
-	private:
-		double lado;
 
-	public:
-		Cuadrado(double lado);
-		double calcular_perimetro();
-		double calcular_superficie();
-		void mostrar();
-		~Cuadrado();
+		private:
+
+				double lado;
+
+		public:
+
+				//constructor
+				Cuadrado(double lado);
+
+				//pre: -
+				//pos: devuelve el perimetro del cuadrado
+				double calcular_perimetro();
+
+				//pre: -
+				//pos: devuelve la superficie del cuadrado
+				double calcular_superficie();
+
+				//pre: -
+				//pos: muestra por pantalla que la figura es un cuadrado y el perimetro y superficie del mismo
+				void mostrar();
+
+				//destructor
+				~Cuadrado();
+
 };
 
 #endif

@@ -9,17 +9,18 @@ const double PI = 3.14159265359;
 class Circulo : public Figura {
 
     private:
+
         double radio;
 
     public:
 
         //constructor
         Circulo(double radio);
-        
+
         //pre: -
         //pos: devuelve el perimetro del circulo
         double calcular_perimetro();
-        
+
         //pre: -
         //pos: devuelve la superficie del circulo
         double calcular_superficie();
@@ -29,6 +30,7 @@ class Circulo : public Figura {
         void mostrar();
 
         ~Circulo();
+
 };
 
 #endif // CIRCULO_H

@@ -18,16 +18,17 @@ const int LONG_TIPO = 16;
 const int LONG_PERIMETRO = 15 + CANTIDAD_DECIMALES;
 const int LONG_SUPERFICIE = 15 + CANTIDAD_DECIMALES;
 
+
 //Pre: recibe la longitud de la lista
 //Pos: devuelve la posicion deseada por el usuario si es que esta es valida
 unsigned pedir_posicion(unsigned longitud_lista);
 
 //Pre: -
-//Pos: imprime por pantalla un mensaje avisando que la lista esta vacia 
+//Pos: imprime por pantalla un mensaje avisando que la lista esta vacia
 void msj_lista_vacia();
 
 //Pre: -
-//Pos: devuelve las cifras del numero ingresado 
+//Pos: devuelve las cifras del numero ingresado
 int contar_cifras(double numero);
 
 //Pre: -
@@ -43,321 +44,383 @@ void dibujar_filas_tabla(Tipo* forma);
 void dibujar_fin_tabla();
 
 //Pre: -
-//Pos: pide las medidas necesarias para la forma y las devuelve  
+//Pos: pide las medidas necesarias para la forma y las devuelve
 double pedir_medida();
 
 void consultar_posicion(Lista &lista) {
-	if (lista.obtener_longitud() <= 0) {
-		msj_lista_vacia();
-		return;
-	}
 
-	unsigned posicion = pedir_posicion(lista.obtener_longitud());
-	Tipo* forma = lista.consultar(posicion);
-	forma->mostrar();
+		if (lista.obtener_longitud() <= LONGITUD_LISTA_VACIA) {
+				msj_lista_vacia();
+				return;
+		}
+
+		unsigned posicion = pedir_posicion(lista.obtener_longitud());
+		Tipo* forma = lista.consultar(posicion);
+		forma->mostrar();
+
 }
 
 void eliminar_objeto(Lista &lista) {
-	if (lista.obtener_longitud() <= 0) {
-		msj_lista_vacia();
-		return;
-	}
 
-	unsigned posicion = pedir_posicion(lista.obtener_longitud());
-	lista.borrar_elemento(posicion);
+		if (lista.obtener_longitud() <= LONGITUD_LISTA_VACIA) {
+				msj_lista_vacia();
+				return;
+		}
+
+		unsigned posicion = pedir_posicion(lista.obtener_longitud());
+		lista.borrar_elemento(posicion);
+
 }
 
 void agregar_objeto(Lista &lista) {
-	string tipo;
-	bool tipo_valido = false;
+		string tipo;
+		bool tipo_valido = false;
 
-	while (!tipo_valido) {
-		cout << " A: Cuadrado, B: Rectangulo, C: Circulo, X: Cancelar" << endl;
-		cout << " Tipo de forma: ";
-		cin >> tipo;
+		while (!tipo_valido) {
+				cout << " A: Cuadrado, B: Rectangulo, C: Circulo, X: Cancelar" << endl;
+				cout << " Tipo de forma: ";
+				cin >> tipo;
 
-		if (tipo.length() == 1 && (tipo == "A" || tipo == "B" || tipo == "C" || tipo == "X")) {
-			tipo_valido = true;
-		} else {
-			cout << endl << " Por favor ingrese una forma valida" << endl;
+			if (tipo.length() == 1 && (tipo == "A" || tipo == "B" || tipo == "C" || tipo == "X")) {
+					tipo_valido = true;
+			} else {
+					cout << endl << " Por favor ingrese una forma valida" << endl;
+			}
+
 		}
-	}
 
-	Figura* figura;
-	if (tipo == "A") {
-		cout << " Ingrese un valor para el lado: ";
-		double lado = pedir_medida();
-		figura = new Cuadrado(lado);
-	} else if (tipo == "B") {
-		cout << " Ingrese un valor para la base: ";
-		double base = pedir_medida();
-		cout << " Ingrese un valor para la altura: ";
-		double altura = pedir_medida();
-		figura = new Rectangulo(altura, base);
-	} else if (tipo == "C") {
-		cout << " Ingrese un valor para el radio: ";
-		double radio = pedir_medida();
-		figura = new Circulo(radio);
-	} else if (tipo == "X") {
-		return;
-	}
+		Figura* figura;
 
-	unsigned posicion = pedir_posicion(lista.obtener_longitud() + 1);
+		if (tipo == "A") {
+				cout << " Ingrese un valor para el lado: ";
+				double lado = pedir_medida();
+				figura = new Cuadrado(lado);
+		} else if (tipo == "B") {
+				cout << " Ingrese un valor para la base: ";
+				double base = pedir_medida();
+				cout << " Ingrese un valor para la altura: ";
+				double altura = pedir_medida();
+				figura = new Rectangulo(altura, base);
+		} else if (tipo == "C") {
+				cout << " Ingrese un valor para el radio: ";
+				double radio = pedir_medida();
+				figura = new Circulo(radio);
+		} else if (tipo == "X") {
+				return;
+		}
 
-	lista.insertar(figura, posicion);
+		unsigned posicion = pedir_posicion(lista.obtener_longitud() + 1);
+
+		lista.insertar(figura, posicion);
 }
 
 void listar(Lista &lista) {
-	if (lista.obtener_longitud() <= 0) {
-		msj_lista_vacia();
-		return;
-	}
 
-	cout << endl << " Listado de formas:" << endl;
-	dibujar_cabecera_tabla();
-	for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
-		dibujar_filas_tabla(lista.consultar(i));
-	}
-	dibujar_fin_tabla();
-	cout << endl;
+		if (lista.obtener_longitud() <= LONGITUD_LISTA_VACIA) {
+					msj_lista_vacia();
+					return;
+		}
+
+		cout << endl << " Listado de formas:" << endl;
+		dibujar_cabecera_tabla();
+
+		for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
+				dibujar_filas_tabla(lista.consultar(i));
+		}
+
+		dibujar_fin_tabla();
+		cout << endl;
 }
 
 void superficie_max(Lista &lista) {
-	if (lista.obtener_longitud() <= 0) {
-		msj_lista_vacia();
-		return;
-	}
 
-	double superficie_maxima = 0;
-	Tipo* forma_mayor = 0;
+		if (lista.obtener_longitud() <= LONGITUD_LISTA_VACIA) {
+				msj_lista_vacia();
+				return;
+    }
 
-	for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
-		Tipo* forma = lista.consultar(i);
-		double superficie = forma->calcular_superficie();
+		double superficie_maxima = 0;
+		Tipo* forma_mayor = 0;
 
-		if (superficie > superficie_maxima) {
-			superficie_maxima = superficie;
-			forma_mayor = forma;
+		for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
+				Tipo* forma = lista.consultar(i);
+				double superficie = forma->calcular_superficie();
+
+				if (superficie > superficie_maxima) {
+						superficie_maxima = superficie;
+						forma_mayor = forma;
+				}
 		}
-	}
 
-	cout << fixed << setprecision(CANTIDAD_DECIMALES);
-	cout << endl << " El objeto con mayor superficie es un " << forma_mayor->obtener_tipo() << " y su valor es " << superficie_maxima << endl;
-	cout << defaultfloat;
+		cout << fixed << setprecision(CANTIDAD_DECIMALES);
+		cout << endl << " El objeto con mayor superficie es un " << forma_mayor->obtener_tipo() << " y su valor es " << superficie_maxima << endl;
+		cout << defaultfloat;
 }
 
 void superficie_min(Lista &lista) {
-	double superficie_minima;
-	Tipo* forma_menor;
 
-	if (lista.obtener_longitud() > 0) {
-		forma_menor = lista.consultar(1);
-		superficie_minima = forma_menor->calcular_superficie();
-	} else {
-		msj_lista_vacia();
-		return;
-	}
+		double superficie_minima;
+		Tipo* forma_menor;
 
-	for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
-		Tipo* forma = lista.consultar(i);
-		double superficie = forma->calcular_superficie();
-
-		if (superficie < superficie_minima) {
-			superficie_minima = superficie;
-			forma_menor = forma;
+		if (lista.obtener_longitud() > LONGITUD_LISTA_VACIA) {
+				forma_menor = lista.consultar(1);
+				superficie_minima = forma_menor->calcular_superficie();
+		} else {
+				msj_lista_vacia();
+				return;
 		}
-	}
 
-	cout << fixed << setprecision(CANTIDAD_DECIMALES);
-	cout << endl << " El objeto con menor superficie es un " << forma_menor->obtener_tipo() << " y su valor es " << superficie_minima << endl;
-	cout << defaultfloat;
+		for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
+				Tipo* forma = lista.consultar(i);
+				double superficie = forma->calcular_superficie();
+
+				if (superficie < superficie_minima) {
+						superficie_minima = superficie;
+						forma_menor = forma;
+				}
+		}
+
+		cout << fixed << setprecision(CANTIDAD_DECIMALES);
+		cout << endl << " El objeto con menor superficie es un " << forma_menor->obtener_tipo() << " y su valor es " << superficie_minima << endl;
+		cout << defaultfloat;
 }
 
 void perimetro_max(Lista &lista) {
-	if (lista.obtener_longitud() <= 0) {
-		msj_lista_vacia();
-		return;
-	}
 
-	double perimetro_maximo = 0;
-	Tipo* forma_mayor = 0;
-
-	for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
-		Tipo* forma = lista.consultar(i);
-		double perimetro = forma->calcular_perimetro();
-
-		if (perimetro > perimetro_maximo) {
-			perimetro_maximo = perimetro;
-			forma_mayor = forma;
+		if (lista.obtener_longitud() <= LONGITUD_LISTA_VACIA) {
+				msj_lista_vacia();
+				return;
 		}
-	}
 
-	cout << fixed << setprecision(CANTIDAD_DECIMALES);
-	cout << endl << " El objeto con mayor perimetro es un " << forma_mayor->obtener_tipo() << " y su valor es " << perimetro_maximo << endl;
-	cout << defaultfloat;
+		double perimetro_maximo = 0;
+		Tipo* forma_mayor = 0;
+
+		for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
+				Tipo* forma = lista.consultar(i);
+				double perimetro = forma->calcular_perimetro();
+
+				if (perimetro > perimetro_maximo) {
+						perimetro_maximo = perimetro;
+						forma_mayor = forma;
+				}
+		}
+
+		cout << fixed << setprecision(CANTIDAD_DECIMALES);
+		cout << endl << " El objeto con mayor perimetro es un " << forma_mayor->obtener_tipo() << " y su valor es " << perimetro_maximo << endl;
+		cout << defaultfloat;
+
 }
 
 void perimetro_min(Lista &lista) {
-	double perimetro_minimo;
-	Tipo* forma_menor;
 
-	if (lista.obtener_longitud() > 0) {
-		forma_menor = lista.consultar(1);
-		perimetro_minimo = forma_menor->calcular_perimetro();
-	} else {
-		msj_lista_vacia();
-		return;
-	}
+		double perimetro_minimo;
+		Tipo* forma_menor;
 
-	for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
-		Tipo* forma = lista.consultar(i);
-		double perimetro = forma->calcular_perimetro();
-
-		if (perimetro < perimetro_minimo) {
-			perimetro_minimo = perimetro;
-			forma_menor = forma;
+		if (lista.obtener_longitud() > LONGITUD_LISTA_VACIA) {
+				forma_menor = lista.consultar(1);
+				perimetro_minimo = forma_menor->calcular_perimetro();
+		} else {
+				msj_lista_vacia();
+				return;
 		}
-	}
 
-	cout << fixed << setprecision(CANTIDAD_DECIMALES);
-	cout << endl << " El objeto con menor perimetro es un " << forma_menor->obtener_tipo() << " y su valor es " << perimetro_minimo << endl;
-	cout << defaultfloat;
+		for (unsigned i = 1; i < lista.obtener_longitud() + 1; i++) {
+				Tipo* forma = lista.consultar(i);
+				double perimetro = forma->calcular_perimetro();
+
+				if (perimetro < perimetro_minimo) {
+						perimetro_minimo = perimetro;
+						forma_menor = forma;
+				}
+		}
+
+		cout << fixed << setprecision(CANTIDAD_DECIMALES);
+		cout << endl << " El objeto con menor perimetro es un " << forma_menor->obtener_tipo() << " y su valor es " << perimetro_minimo << endl;
+		cout << defaultfloat;
+
 }
 
 unsigned pedir_posicion(unsigned longitud_lista) {
-	bool posicion_valida = false;
-	unsigned posicion;
 
-	while (!posicion_valida) {
-		cout << " Ingresar posicion deseada: ";
-		cin >> posicion;
+		bool posicion_valida = false;
+		unsigned posicion;
 
-		while (!cin.good()) { // Comprobar que sea un numero
-			cin.clear();
-			cin.ignore();
-			cout << " Por favor ingrese un numero valido";
-			cin >> posicion;
+		while (!posicion_valida) {
+				cout << " Ingresar posicion deseada: ";
+				cin >> posicion;
+
+				while (!cin.good()) { // Comprobar que sea un numero
+						cin.clear();
+						cin.ignore();
+						cout << " Por favor ingrese un numero valido";
+						cin >> posicion;
+				}
+
+				if (posicion > 0 && posicion <= longitud_lista) {
+						posicion_valida = true;
+				} else {
+						cout << endl;
+						cout << " Por favor ingrese una posicion valida (mayor a 0 y menor o igual a " << longitud_lista << ")";
+						cout << endl;
+				}
 		}
+		return posicion;
 
-		if (posicion > 0 && posicion <= longitud_lista) {
-			posicion_valida = true;
-		} else {
-			cout << endl;
-			cout << " Por favor ingrese una posicion valida (mayor a 0 y menor o igual a " << longitud_lista << ")";
-			cout << endl;
-		}
-	}
-	return posicion;
 }
 
 double pedir_medida() {
-	double medida;
-	cin >> medida;
-	while (!cin.good()) {
-		cin.clear();
-		cin.ignore();
-		cout << " Por favor ingrese un numero valido";
-		cin >> medida;
-	}
 
-	return medida;
+		double medida;
+		cin >> medida;
+
+		while (!cin.good()) {
+				cin.clear();
+				cin.ignore();
+				cout << " Por favor ingrese un numero valido";
+				cin >> medida;
+		}
+
+		return medida;
+
 }
 
 void msj_lista_vacia() {
-	cout << endl << " No se encontro ninguna forma en la lista" << endl << endl;
+
+		cout << endl << " No se encontro ninguna forma en la lista" << endl << endl;
+
 }
 
 int contar_cifras(double numero) {
-	string str_numero = to_string(numero);
-	return (int)str_numero.find(".") + CANTIDAD_DECIMALES + 1;
+
+		string str_numero = to_string(numero);
+		return (int)str_numero.find(".") + CANTIDAD_DECIMALES + 1;
+
 }
 
 void dibujar_cabecera_tabla() {
-	// Primer fila (Borde)
-	cout << ESQUINA_SUPERIOR_IZQUIERDA;
-	for (int i = 0; i < LONG_TIPO; i++) {
-		cout << LINEA_HORIZONTAL;
-	}
-	cout << LINEA_HORIZONTAL_UNION_SUPERIOR;
-	for (int i = 0; i < LONG_PERIMETRO; i++) {
-		cout << LINEA_HORIZONTAL;
-	}
-	cout << LINEA_HORIZONTAL_UNION_SUPERIOR;
-	for (int i = 0; i < LONG_SUPERFICIE; i++) {
-		cout << LINEA_HORIZONTAL;
-	}
-	cout << ESQUINA_SUPERIOR_DERECHA << endl;
 
-	// Segunda fila (Titulos)
-	cout << LINEA_VERTICAL;
-	cout << "Tipo:";
-	for (int i = 0; i < LONG_TIPO - 5; i++) {
-		cout << " ";
-	}
-	cout << LINEA_VERTICAL;
-	cout << "Perimetro:";
-	for (int i = 0; i < LONG_PERIMETRO - 10; i++) {
-		cout << " ";
-	}
-	cout << LINEA_VERTICAL;
-	cout << "Superficie:";
-	for (int i = 0; i < LONG_SUPERFICIE - 11; i++) {
-		cout << " ";
-	}
-	cout << LINEA_VERTICAL << endl;
+		// Primer fila (Borde)
+		cout << ESQUINA_SUPERIOR_IZQUIERDA;
 
-	// Tercer fila (separador header)
-	cout << LINEA_VERTICAL_UNION_IZQUIERDA;
-	for (int i = 0; i < LONG_TIPO; i++) {
-		cout << LINEA_HORIZONTAL;
-	}
-	cout << CRUZ;
-	for (int i = 0; i < LONG_PERIMETRO; i++) {
-		cout << LINEA_HORIZONTAL;
-	}
-	cout << CRUZ;
-	for (int i = 0; i < LONG_SUPERFICIE; i++) {
-		cout << LINEA_HORIZONTAL;
-	}
-	cout << LINEA_VERTICAL_UNION_DERECHA << endl;
+		for (int i = 0; i < LONG_TIPO; i++) {
+				cout << LINEA_HORIZONTAL;
+		}
+
+		cout << LINEA_HORIZONTAL_UNION_SUPERIOR;
+
+		for (int i = 0; i < LONG_PERIMETRO; i++) {
+				cout << LINEA_HORIZONTAL;
+		}
+
+		cout << LINEA_HORIZONTAL_UNION_SUPERIOR;
+
+		for (int i = 0; i < LONG_SUPERFICIE; i++) {
+				cout << LINEA_HORIZONTAL;
+		}
+
+		cout << ESQUINA_SUPERIOR_DERECHA << endl;
+
+		// Segunda fila (Titulos)
+		cout << LINEA_VERTICAL;
+		cout << "Tipo:";
+
+		for (int i = 0; i < LONG_TIPO - 5; i++) {
+				cout << " ";
+		}
+
+		cout << LINEA_VERTICAL;
+		cout << "Perimetro:";
+
+		for (int i = 0; i < LONG_PERIMETRO - 10; i++) {
+				cout << " ";
+		}
+
+		cout << LINEA_VERTICAL;
+		cout << "Superficie:";
+
+		for (int i = 0; i < LONG_SUPERFICIE - 11; i++) {
+				cout << " ";
+		}
+
+		cout << LINEA_VERTICAL << endl;
+
+		// Tercer fila (separador header)
+		cout << LINEA_VERTICAL_UNION_IZQUIERDA;
+
+		for (int i = 0; i < LONG_TIPO; i++) {
+				cout << LINEA_HORIZONTAL;
+		}
+
+		cout << CRUZ;
+
+		for (int i = 0; i < LONG_PERIMETRO; i++) {
+				cout << LINEA_HORIZONTAL;
+		}
+
+		cout << CRUZ;
+
+		for (int i = 0; i < LONG_SUPERFICIE; i++) {
+				cout << LINEA_HORIZONTAL;
+		}
+
+		cout << LINEA_VERTICAL_UNION_DERECHA << endl;
+
 }
 
 void dibujar_filas_tabla(Tipo* forma) {
-	cout << LINEA_VERTICAL;
-	cout << forma->obtener_tipo();
-	for (unsigned i = 0; i < LONG_TIPO - (forma->obtener_tipo()).length(); i++) {
-		cout << " ";
-	}
-	cout << fixed << setprecision(CANTIDAD_DECIMALES);
-	cout << LINEA_VERTICAL;
-	cout << forma->calcular_perimetro();
-	int resto = contar_cifras(forma->calcular_perimetro());
-	for (int i = 0; i < LONG_PERIMETRO - resto; i++) {
-		cout << " ";
-	}
-	cout << LINEA_VERTICAL;
-	cout << forma->calcular_superficie();
-	resto = contar_cifras(forma->calcular_superficie());
-	for (int i = 0; i < LONG_SUPERFICIE - resto; i++) {
-		cout << " ";
-	}
-	cout << LINEA_VERTICAL;
-	cout << endl;
-	cout << defaultfloat;
+
+		int resto;
+
+		cout << LINEA_VERTICAL;
+		cout << forma->obtener_tipo();
+
+		for (unsigned i = 0; i < LONG_TIPO - (forma->obtener_tipo()).length(); i++) {
+				cout << " ";
+		}
+
+		cout << fixed << setprecision(CANTIDAD_DECIMALES);
+		cout << LINEA_VERTICAL;
+		cout << forma->calcular_perimetro();
+		resto = contar_cifras(forma->calcular_perimetro());
+
+		for (int i = 0; i < LONG_PERIMETRO - resto; i++) {
+				cout << " ";
+		}
+
+		cout << LINEA_VERTICAL;
+		cout << forma->calcular_superficie();
+		resto = contar_cifras(forma->calcular_superficie());
+
+		for (int i = 0; i < LONG_SUPERFICIE - resto; i++) {
+				cout << " ";
+		}
+
+		cout << LINEA_VERTICAL;
+		cout << endl;
+		cout << defaultfloat;
+
 }
 
 void dibujar_fin_tabla() {
-	cout << ESQUINA_INFERIOR_IZQUIERDA;
-	for (int i = 0; i < LONG_TIPO; i++) {
-		cout << LINEA_HORIZONTAL;
-	}
-	cout << LINEA_HORIZONTAL_UNION_INFERIOR;
-	for (int i = 0; i < LONG_PERIMETRO; i++) {
-		cout << LINEA_HORIZONTAL;
-	}
-	cout << LINEA_HORIZONTAL_UNION_INFERIOR;
-	for (int i = 0; i < LONG_SUPERFICIE; i++) {
-		cout << LINEA_HORIZONTAL;
-	}
-	cout << ESQUINA_INFERIOR_DERECHA << endl;
+
+		cout << ESQUINA_INFERIOR_IZQUIERDA;
+
+		for (int i = 0; i < LONG_TIPO; i++) {
+				cout << LINEA_HORIZONTAL;
+		}
+
+		cout << LINEA_HORIZONTAL_UNION_INFERIOR;
+
+		for (int i = 0; i < LONG_PERIMETRO; i++) {
+				cout << LINEA_HORIZONTAL;
+		}
+
+		cout << LINEA_HORIZONTAL_UNION_INFERIOR;
+
+		for (int i = 0; i < LONG_SUPERFICIE; i++) {
+				cout << LINEA_HORIZONTAL;
+		}
+
+		cout << ESQUINA_INFERIOR_DERECHA << endl;
+
 }
